@@ -1,5 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { Header } from '@components'
 
-export const App: FC = () => {
-  return <div className='App'></div>;
+export const App: React.FC = () => {
+  return <div className='App'>
+    <Header />
+  </div>;
 };
