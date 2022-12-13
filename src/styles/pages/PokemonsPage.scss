@@ -1,0 +1,11 @@
+.pokemons__page{
+  margin-top: 40px;
+  .pokemons__page__container{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-row-gap: 40px;
+  }
+}

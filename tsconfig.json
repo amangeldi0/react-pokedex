@@ -20,7 +20,7 @@
     "paths": {
       "@pages": ["./pages"],
       "@components": ["./components"],
-      "assets": ["./assets"]
+      "@types": ["./@types"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
