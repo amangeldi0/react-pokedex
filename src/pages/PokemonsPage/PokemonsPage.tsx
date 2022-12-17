@@ -16,12 +16,17 @@ export const PokemonsPage: React.FC = () => {
     const { ref, inView } = useInView();
     const data: IResponsePokemons[] | 'loading' = usePokemonsQueries(offset);
 
-    useTakePokemonName();
+
     useEffect(() => {
         if (inView && offset < 905) {
             setOffset(prevState => prevState + 20);
         }
     }, [inView]);
+
+    useEffect(() => {
+        // useTakePokemonName();
+    }, []);
+
 
     if (data === 'loading') return null;
 

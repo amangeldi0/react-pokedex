@@ -44,7 +44,9 @@ export interface IResponsePokemons {
 
 
 }
-
+export interface IAutoCompleteProps {
+    suggestions: string[] | undefined;
+}
 
 
 export interface usePokemonsQueriesProps {
