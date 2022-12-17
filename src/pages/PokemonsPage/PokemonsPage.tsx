@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useInView } from 'react-intersection-observer';
 
 import { PokemonCard } from '@components';
-import {usePokemonsQueries, useTakePokemonName} from "@hooks";
+import {usePokemonsQueries} from "@hooks";
 import {IResponsePokemons} from "@types";
 
 

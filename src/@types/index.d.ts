@@ -1,4 +1,5 @@
 import {AxiosRequestConfig} from "axios";
+import {Dispatch, SetStateAction} from "react";
 
 // max attack 190
 // max speed 200
@@ -49,8 +50,10 @@ export interface IAutoCompleteProps {
 }
 
 
-export interface usePokemonsQueriesProps {
-    offset: number;
+
+export interface useOutsideClickProps {
+    initialIsVisible: boolean;
+    setSearch: Dispatch<SetStateAction<string>>
 }
 
 export interface IRequestPokemonParams {

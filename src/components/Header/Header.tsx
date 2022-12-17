@@ -6,9 +6,8 @@ export const Header: React.FC = () => {
     const [suggestions, setSuggestions] = useState<string[]>([]);
 
     const getItemsFromLS = (): void => {
-        if (localStorage.getItem('names') !== null){
-            setSuggestions(JSON.parse(localStorage.getItem('names')));
-        }
+        const suggest: string | null = localStorage.getItem('names');
+        setSuggestions(suggest !== null ? JSON.parse(suggest) : ['Problems with fetching'])
     };
 
     useEffect(() => {
