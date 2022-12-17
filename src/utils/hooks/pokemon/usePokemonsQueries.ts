@@ -7,13 +7,12 @@ const requestPokemons = async ({ params, config } : IRequestPokemonParams) => {
 };
 
 export const usePokemonsQueries = (offset: number) => {
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, isError } = useQuery({
         queryKey: ['pokemon', offset],
         queryFn: async () => await requestPokemons({params: { limit: offset } }),
         keepPreviousData: true
     });
 
-    if (isLoading) return 'loading';
 
-    return data.results;
+    return {isLoading, isError, data};
 };

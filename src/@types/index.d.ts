@@ -60,3 +60,14 @@ export interface IRequestPokemonParams {
     params: { limit: number };
     config?: AxiosRequestConfig;
 }
+interface IResponseArray {
+    name: string;
+    url: string;
+}
+export interface IResponsePokemonsLink {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: IResponseArray[];
+
+}

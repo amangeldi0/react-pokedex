@@ -1,5 +1,22 @@
 .pokemons__page{
   margin-top: 40px;
+  .go__up{
+    position: fixed;
+    background: #ef5350;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    cursor: pointer;
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
   .pokemons__page__container{
     display: grid;
     justify-items: center;

@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
-
 import accountIcon from '../../assets/icon/account_icon.svg';
 import {AutoCompleteSearch} from "../AutoCompleteSearch/AutoCompleteSearch";
+
+
 export const Header: React.FC = () => {
+
     const [suggestions, setSuggestions] = useState<string[]>([]);
 
     const getItemsFromLS = (): void => {
@@ -13,7 +15,6 @@ export const Header: React.FC = () => {
     useEffect(() => {
         getItemsFromLS();
     }, []);
-
 
     return(
         <header className='header'>
