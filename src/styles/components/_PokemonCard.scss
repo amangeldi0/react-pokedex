@@ -8,7 +8,6 @@
   border-radius: 10px;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px, rgba(0, 0, 0, 0.24) 0 1px 2px;
-
   transition: all ease .5s;
   &:hover{
     background: #f5f5f5;
@@ -18,9 +17,28 @@
   .pokemon__image{
     width: 150px;
     margin-top: 20px;
-    img{
+    height: 150px;
+    position: relative;
+    .image{
       width: 100%;
     }
+    .loader{
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: absolute;
+      img{
+        width: 60%;
+        height: 60%;
+      }
+      .info{
+        font-size: 12px;
+      }
+    }
+
   }
   .pokemon__name{
     text-transform: capitalize;
@@ -60,5 +78,76 @@
       width: 15px;
       height: 15px;
     }
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100%{
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+.pokemon__card__skeleton{
+  width: 180px;
+  height: 230px;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px, rgba(0, 0, 0, 0.24) 0 1px 2px;
+  .number__skeleton{
+    position: absolute;
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+    width: 30px;
+    border-radius: 3px;
+    height: 15px;
+    top: 10px;
+    left: 10px;
+    background: #797878;
+  }
+  .types__skeleton{
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    .types__circle{
+      opacity: .7;
+      animation: skeleton-loading 1s linear infinite alternate;
+      height: 25px;
+      width: 25px;
+      @extend %flex;
+      align-items: center;
+      border-radius: 50px;
+      background: #797878;
+    }
+  }
+  .image_skeleton{
+    width: 130px;
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+    border-radius: 100px;
+    margin-top: 50px;
+    margin-left: -5px;
+    height: 130px;
+    position: relative;
+    background: #797878;
+  }
+  .name_skeleton{
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+    margin-top: 10px;
+    width: 90px;
+    height: 15px;
+    background: #797878;
+    margin-left: -5px;
   }
 }

@@ -1,5 +1,12 @@
 import {AxiosRequestConfig} from "axios";
 
+// max attack 190
+// max speed 200
+// max defence 250
+// max hp 255
+// max species attack 194
+// max species defence 250
+
 
 interface stat {
     stat: string;
@@ -11,19 +18,6 @@ export interface IPokemonTypesProps {
     secondType?: string;
 }
 
-export interface IPokemonTypesColor {
-    [key: string] : string
-}
-export interface IPokemonTypeStyles {
-    [key: string] : string
-}
-
-// max attack 190
-// max speed 200
-// max defence 250
-// max hp 255
-// max species attack 194
-// max species defence 250
 
 export interface IResponsePokemons {
     id: number;
@@ -52,11 +46,12 @@ export interface IResponsePokemons {
 }
 
 
+
 export interface usePokemonsQueriesProps {
     offset: number;
 }
 
 export interface IRequestPokemonParams {
-    params: { id: number };
+    params: { limit: number };
     config?: AxiosRequestConfig;
 }

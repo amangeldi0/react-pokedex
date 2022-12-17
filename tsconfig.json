@@ -20,7 +20,8 @@
     "paths": {
       "@pages": ["./pages"],
       "@components": ["./components"],
-      "@types": ["./@types"]
+      "@types": ["./@types"],
+      "@hooks": ["./utils/hooks"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

@@ -1,19 +1,19 @@
-import {usePokemonsQueriesProps, IRequestPokemonParams } from "@types";
-import {useQueries} from "@tanstack/react-query";
+import { IRequestPokemonParams } from "@types";
+import { useQuery } from "@tanstack/react-query";
 import {api} from "./intance";
 
-const requestPokemonById = async ({ params, config } : IRequestPokemonParams) => {
-    return  await api.get(`pokemon/${params.id}`, {...config});
+const requestPokemons = async ({ params, config } : IRequestPokemonParams) => {
+    return  await api.get(`/pokemon?limit=${params.limit}&offset=0`, {...config}).then(data => data.data);
 };
 
-export const usePokemonsQueries = ({offset} : usePokemonsQueriesProps) => {
-    return useQueries({
-        queries: Array.from({length: offset}).map((_el: any, index:number) => {
-            const pokemonId: number = index + 1;
-            return {
-                queryKey: ['pokemon', pokemonId],
-                queryFn: async () => await requestPokemonById({params: {id: pokemonId}})
-            };
-        })
+export const usePokemonsQueries = (offset: number) => {
+    const { data, isLoading } = useQuery({
+        queryKey: ['pokemon', offset],
+        queryFn: async () => await requestPokemons({params: { limit: offset } }),
+        keepPreviousData: true
     });
+
+    if (isLoading) return 'loading';
+
+    return data.results;
 };

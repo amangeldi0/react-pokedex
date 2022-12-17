@@ -29,4 +29,4 @@ export const PokemonTypes: React.FC<IPokemonTypesProps> = ({firstType, secondTyp
             </div>
         );
     }
-}
+};

@@ -41,17 +41,22 @@
         margin-top: 3px;
       }
     }
-    .search__button{
-      width: 30px;
-      display: none;
-    }
     .header__search{
+      width: 300px;
       outline: none;
       border-radius: 7px;
       font-size: 11px;
       padding: 1px 5px;
       border: 1px solid rgba(66, 66, 66, 0.82);
+      @media (max-width: 600px) {
+        width: 200px;
+        padding: 0 3px;
+        margin-top: 3px;
+        font-size: 9px;
+        border-radius: 5px;
+      }
       @media (max-width: 400px) {
+        width: 100px;
         padding: 0 3px;
         margin-top: 3px;
         font-size: 9px;

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import {usePokemonsQueries} from "../../utils/hooks/api/usePokemonsQueries";
+import React, { useState, useEffect } from "react";
+
+import { useInView } from 'react-intersection-observer';
+
 import { PokemonCard } from '@components';
+import {usePokemonsQueries, useTakePokemonName} from "@hooks";
 import {IResponsePokemons} from "@types";
-import {typingPokemon} from "../../utils/hooks/pokemon/typingPokemon";
 
 
 
@@ -10,31 +12,35 @@ import {typingPokemon} from "../../utils/hooks/pokemon/typingPokemon";
 
 export const PokemonsPage: React.FC = () => {
 
-    const [offset, setOffset] = useState<number>(40);
+    const [offset, setOffset] = useState<number>(45);
+    const { ref, inView } = useInView();
+    const data: IResponsePokemons[] | 'loading' = usePokemonsQueries(offset);
+
+    useTakePokemonName();
+    useEffect(() => {
+        if (inView && offset < 905) {
+            setOffset(prevState => prevState + 20);
+        }
+    }, [inView]);
+
+    if (data === 'loading') return null;
 
 
-    const results = usePokemonsQueries({offset});
-
-
-    const isLoading = results.some(result => result.isLoading);
-
-    if (isLoading) return null;
-
-    const pokemons: IResponsePokemons[] = typingPokemon(results);
 
     return(
         <div className="pokemons__page">
             <div className="pokemons__page__container">
                 {
-                    pokemons.map(pokemon => {
+                    data.map((pokemon: any) => {
                         return <PokemonCard
-                            key={pokemon.id}
-                            pokemon={pokemon}
+                            key={pokemon.name}
+                            pokemonUrl={pokemon.url}
+                            pokemonName={pokemon.name}
                         />;
                     })
                 }
             </div>
-            <button onClick={() => setOffset(offset + 10)}>More</button>
+            <button ref={ref}>More</button>
         </div>
     );
 };
