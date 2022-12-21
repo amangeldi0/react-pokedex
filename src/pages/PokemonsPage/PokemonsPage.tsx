@@ -2,19 +2,15 @@ import React, { useState, useEffect } from "react";
 
 import { useInView } from 'react-intersection-observer';
 
+
 import {GoUp, PokemonCard, Spinner} from '@components';
 import { usePokemonsQueries, useTakePokemonName } from "@hooks";
-import { IResponsePokemonsLink } from "@types";
-
-
-
-
-
 export const PokemonsPage: React.FC = () => {
 
     const [offset, setOffset] = useState<number>(45);
     const { ref, inView } = useInView();
-    const {data, isError, isLoading}: {data: IResponsePokemonsLink, isError: boolean, isLoading: boolean} = usePokemonsQueries(offset);
+    const {data, isError, isLoading} = usePokemonsQueries(offset);
+
 
     useTakePokemonName();
 
@@ -49,7 +45,7 @@ export const PokemonsPage: React.FC = () => {
             </div>
 
         );
-    };
+    }
 
     if (isError) throw new Error('some error with Pokemons Data');
 
@@ -63,8 +59,7 @@ export const PokemonsPage: React.FC = () => {
                     data.results.map((pokemon) => {
                         return <PokemonCard
                             key={pokemon.name}
-                            pokemonUrl={pokemon.url}
-                            pokemonName={pokemon.name}
+                            pokemonProps={pokemon}
                         />;
                     })
                 }

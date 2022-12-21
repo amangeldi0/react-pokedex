@@ -1,16 +1,24 @@
 import React, {useState} from "react";
-import { PokemonTypes } from "../PokemonType/PokemonTypes";
-import { usePokemonQuery, useTypingPokemon } from "@hooks";
+import { usePokemonQuery,  } from "@hooks";
+import { useNavigate } from "react-router";
+import { PokemonTypes } from '@components';
+
+import { Result } from "@types";
 import loader from '../../assets/loader.gif';
 
-export const PokemonCard: React.FC<{pokemonUrl: string, pokemonName: string}> = ( {pokemonUrl, pokemonName}) => {
-    const { data, isLoading} = usePokemonQuery(pokemonUrl, pokemonName);
-    const pokemon = useTypingPokemon(data, isLoading);
+export const PokemonCard: React.FC<{pokemonProps: Result}> = ({pokemonProps}) => {
+
     const [load, setLoad] = useState<boolean>(true);
 
+    const {url, name} = pokemonProps;
 
+    const { data, isLoading, isError} = usePokemonQuery({url, name});
 
-    if (pokemon === 'loading') return (
+    const navigate = useNavigate();
+
+    if (isError) throw new Error('some problems with fetching to Pokemons')
+
+    if (isLoading) return (
         <div className='pokemon__card__skeleton'>
             <div className="number__skeleton"></div>
             <div className="types__skeleton">
@@ -22,21 +30,21 @@ export const PokemonCard: React.FC<{pokemonUrl: string, pokemonName: string}> = 
         </div>
     );
 
-    const {imageUrl, id, name, types} = pokemon;
-    const {firstType, secondType} = types;
+    const {name: PokemonName, id, sprites, types} = data;
+    const imgLink = sprites.other?.["official-artwork"].front_default;
 
     return(
-        <div className='pokemon__card'>
-            <div className="pokemon__image">
-                {load ? <div className='loader'><img src={loader} alt=""/> <div className='info'>image loading...</div></div> : <div></div>}
-                <img src={imageUrl} alt="pokemon__image" className='image' loading='lazy' onLoad={() => setLoad(false)}/>
 
+        <div className='pokemon__card' onClick={() => navigate(`/pokemon/${PokemonName}`)}>
+            <div className="pokemon__image">
+                {load ? <div className='loader'><img src={loader} alt=""/> <div className='info'>image loading...</div></div> : <div><img src={imgLink} alt="pokemon__image" className='image' onLoad={() => setLoad(false)}/></div>}
+                <img src={imgLink} alt="pokemon__image" className='image' onLoad={() => setLoad(false)} style={{display: "none"}}/>
             </div>
             <div className="pokemon__number">
                 #{id.toString().length === 1 ? `00${id}` : id.toString().length === 2 ? `0${id}` : `${id}`}
             </div>
-            <div className="pokemon__name">{name}</div>
-            <PokemonTypes firstType={firstType} secondType={secondType} />
+            <div className="pokemon__name">{PokemonName}</div>
+            <PokemonTypes types={types}/>
         </div>
     );
 

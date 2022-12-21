@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { IAutoCompleteProps } from '@types';
-import {useOutsideClick} from "@hooks";
+import { useOutsideClick } from "@hooks";
+
 export const AutoCompleteSearch: React.FC<IAutoCompleteProps> = ({suggestions}) => {
     const [search, setSearch] = useState<string>('');
 
@@ -8,7 +9,7 @@ export const AutoCompleteSearch: React.FC<IAutoCompleteProps> = ({suggestions}) 
     const {ref, show, setShow} = useOutsideClick({initialIsVisible: false, setSearch});
 
     if (suggestions?.length === 1){
-        throw new Error('Some problems with fetching name')
+        throw new Error('Some problems with fetching name');
     }
 
     const filter = search.length !== 0 ? suggestions?.filter(suggest =>

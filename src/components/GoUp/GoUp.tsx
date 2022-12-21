@@ -1,5 +1,5 @@
 import React from "react";
-import arrow from '../../assets/icon/arrow.svg'
+import arrow from '../../assets/icon/arrow.svg';
 
 export const GoUp = () => {
     const handleUpButton = () => {

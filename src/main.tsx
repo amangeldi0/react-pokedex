@@ -7,7 +7,13 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 import './styles/global.scss';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false
+        }
+    }
+});
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);

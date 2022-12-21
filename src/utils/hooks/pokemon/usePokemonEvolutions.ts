@@ -1,11 +1,12 @@
-import axios from "axios";
 import {useQuery} from "@tanstack/react-query";
-import { Result, Pokemon } from "@types";
+import { Evolution} from "@types";
+import axios from "axios";
 
-export const usePokemonQuery = ({url, name}: Result): { data: Pokemon; isLoading: boolean; isError: boolean } => {
+
+export const usePokemonEvolutions = (url: string): { data: Evolution; isLoading: boolean; isError: boolean } => {
 
     const {data, isLoading, isError} = useQuery({
-        queryKey: ['pokemon', name],
+        queryKey: ['evolution', url],
         queryFn: async () => await axios.get(url).then(data => data.data)
     });
     return {data, isLoading, isError};

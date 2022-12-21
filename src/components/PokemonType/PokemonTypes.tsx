@@ -1,23 +1,22 @@
 import React from "react";
-import {IPokemonTypesProps} from "@types";
+import { Type } from "@types";
 
 function getImgUrl(fileName: string) : string{
     return new URL(`../../assets/icon/typeIcon/${fileName}.png`, import.meta.url).href;
 }
 
+export const PokemonTypes: React.FC<{types: Type[]}> = ({types}) => {
 
-export const PokemonTypes: React.FC<IPokemonTypesProps> = ({firstType, secondType}) => {
+    const firstType = types[0]?.type.name;
+    const secondType = types[1]?.type.name;
 
-
-    if (secondType !== undefined){
+    if (types.length === 1){
         return (
             <div className='pokemonTypes'>
                 <div className={`type ${firstType}`}>
                     <img src={getImgUrl(firstType)} alt={`${firstType}`}/>
                 </div>
-                <div className={`type ${secondType}`}>
-                    <img src={getImgUrl(secondType)} alt={`${secondType}`}/>
-                </div>
+
             </div>
         );
     }else {
@@ -25,6 +24,9 @@ export const PokemonTypes: React.FC<IPokemonTypesProps> = ({firstType, secondTyp
             <div className='pokemonTypes'>
                 <div className={`type ${firstType}`}>
                     <img src={getImgUrl(firstType)} alt={`${firstType}`}/>
+                </div>
+                <div className={`type ${secondType}`}>
+                    <img src={getImgUrl(secondType)} alt={`${secondType}`}/>
                 </div>
             </div>
         );
