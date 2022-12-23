@@ -21,7 +21,9 @@
       "@pages": ["./pages"],
       "@components": ["./components"],
       "@types": ["./@types"],
-      "@hooks": ["./utils/hooks"]
+      "@hooks": ["./utils/hooks"],
+      "@helpers": ["./utils/helpers"],
+      "@constants": ["./utils/constants"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
