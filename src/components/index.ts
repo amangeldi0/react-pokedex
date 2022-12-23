@@ -5,3 +5,4 @@ export * from  './PokemonType/PokemonTypes';
 export * from './AutoCompleteSearch/AutoCompleteSearch';
 export * from './Spinner/Spinner';
 export * from './GoUp/GoUp';
+export * from './PokemonEvolutionChain/PokemonEvolutionChain';
