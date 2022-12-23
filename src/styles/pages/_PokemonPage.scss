@@ -1,0 +1,136 @@
+
+@keyframes loading {
+  0%{
+    width: 0%;
+   }
+  100%{
+    width: 100%;
+  }
+}
+
+.pokemon__page{
+  .pokemon__page__container{
+    width: 95%;
+    margin: 0 auto;
+    .pokemon__name{
+      text-align: center;
+      text-transform: uppercase;
+      color: #6d6d6d;
+      transition: opacity .6s ease-in-out;
+      font-size: 25px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin: 20px 0;
+    }
+    .pokemon__info__image__stats{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .info{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        .inf{
+          display: flex;
+          color: #505050;
+          width: 300px;
+          gap: 50px;
+          span{
+            text-align: right;
+            color: #505050;
+            font-weight: 500;
+            width: 100px;
+          }
+          .content{
+            width: 200px;
+
+          }
+          .content__ability{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            .ability{
+              padding: 3px 9px;
+              color: white;
+              text-transform: uppercase;
+              font-size: 13px;
+              border-radius: 3px;
+            }
+          }
+          .content__form{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            .form{
+              padding: 3px 9px;
+              color: white;
+              text-transform: uppercase;
+              font-size: 13px;
+              border-radius: 3px;
+            }
+          }
+          .content__type{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            .type{
+              border-radius: 3px;
+              padding: 3px 9px;
+              font-size: 15px;
+              color: white;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              text-transform: capitalize;
+              .type__image{
+                width: 14px;
+                height: 14px;
+              }
+            }
+          }
+        }
+      }
+      .stats{
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        .stat{
+          display: flex;
+          align-items: center;
+          gap: 50px;
+          .title{
+            width: 100px;
+            text-align: right;
+            color: #505050;
+            font-weight: 500;
+            text-transform: capitalize;
+          }
+          .total_value{
+            font-size: 13px;
+          }
+          .value{
+            width: 180px;
+            height: 15px;
+            background-color: #e9ecef;
+            border-radius: 0.25rem;
+            .progress_bar{
+              height: 100%;
+              border-radius: 0.25rem;
+              position: relative;
+              .statValue{
+                color: white;
+                font-size: 12px;
+                position: absolute;
+                right: 2px;
+                padding: 0 0 0 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

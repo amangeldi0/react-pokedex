@@ -4,6 +4,19 @@
   position: relative;
   width: 100vw;
   height: 58px;
+  .back_img{
+    top: 26%;
+    cursor: pointer;
+    left: 20px;
+    position: absolute;
+    height: 30px;
+    width: 50px;
+    padding: 2px 0;
+    border-radius: 5px;
+    &:hover{
+      background: rgba(208, 208, 208, 0.49);
+    }
+  }
 }
 .header__container{
   @extend %flex;
