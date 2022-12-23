@@ -4,15 +4,15 @@ import { useInView } from 'react-intersection-observer';
 
 
 import {GoUp, PokemonCard, Spinner} from '@components';
-import { usePokemonsQueries, useTakePokemonName } from "@hooks";
+import { useGetPokemons, useGetPokemonNamesToLs } from "@hooks";
 export const PokemonsPage: React.FC = () => {
 
     const [offset, setOffset] = useState<number>(45);
     const { ref, inView } = useInView();
-    const {data, isError, isLoading} = usePokemonsQueries(offset);
+    const {data, isError, isLoading} = useGetPokemons(offset);
 
 
-    useTakePokemonName();
+    useGetPokemonNamesToLs();
 
     useEffect(() => {
         if (inView && offset < 905 && !isLoading && !isError) {
