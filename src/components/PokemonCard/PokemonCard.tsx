@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { usePokemonQuery,  } from "@hooks";
+import { useGetPokemonByUrl,  } from "@hooks";
 import { useNavigate } from "react-router";
 import { PokemonTypes } from '@components';
 
@@ -12,7 +12,7 @@ export const PokemonCard: React.FC<{pokemonProps: Result}> = ({pokemonProps}) =>
 
     const {url, name} = pokemonProps;
 
-    const { data, isLoading, isError} = usePokemonQuery({url, name});
+    const { data, isLoading, isError} = useGetPokemonByUrl({url, name});
 
     const navigate = useNavigate();
 

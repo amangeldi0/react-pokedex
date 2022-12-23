@@ -1,9 +1,7 @@
 import React from "react";
 import { Type } from "@types";
+import {getImgPathLink} from "@helpers";
 
-function getImgUrl(fileName: string) : string{
-    return new URL(`../../assets/icon/typeIcon/${fileName}.png`, import.meta.url).href;
-}
 
 export const PokemonTypes: React.FC<{types: Type[]}> = ({types}) => {
 
@@ -14,7 +12,7 @@ export const PokemonTypes: React.FC<{types: Type[]}> = ({types}) => {
         return (
             <div className='pokemonTypes'>
                 <div className={`type ${firstType}`}>
-                    <img src={getImgUrl(firstType)} alt={`${firstType}`}/>
+                    <img src={getImgPathLink(firstType)} alt={`${firstType}`}/>
                 </div>
 
             </div>
@@ -23,10 +21,10 @@ export const PokemonTypes: React.FC<{types: Type[]}> = ({types}) => {
         return (
             <div className='pokemonTypes'>
                 <div className={`type ${firstType}`}>
-                    <img src={getImgUrl(firstType)} alt={`${firstType}`}/>
+                    <img src={getImgPathLink(firstType)} alt={`${firstType}`}/>
                 </div>
                 <div className={`type ${secondType}`}>
-                    <img src={getImgUrl(secondType)} alt={`${secondType}`}/>
+                    <img src={getImgPathLink(secondType)} alt={`${secondType}`}/>
                 </div>
             </div>
         );
