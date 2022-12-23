@@ -7,7 +7,7 @@ const requestPokemons = async ({ params, config } : IRequestPokemonParamsByName)
 };
 
 
-export const usePokemonQueryByName = (name: string): {data: Pokemon, isError: boolean, isLoading: boolean} => {
+export const useGetPokemonByName = (name: string): {data: Pokemon, isError: boolean, isLoading: boolean} => {
     const  {data, isError, isLoading} = useQuery({
         queryKey: ['pokemon', name],
         queryFn: async () => await requestPokemons({params: {name}})

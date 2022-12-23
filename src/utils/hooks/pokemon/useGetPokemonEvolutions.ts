@@ -3,11 +3,12 @@ import { Evolution} from "@types";
 import axios from "axios";
 
 
-export const usePokemonEvolutions = (url: string): { data: Evolution; isLoading: boolean; isError: boolean } => {
+export const useGetPokemonEvolutions = (url: string): { data: Evolution; isLoading: boolean; isError: boolean } => {
 
     const {data, isLoading, isError} = useQuery({
         queryKey: ['evolution', url],
-        queryFn: async () => await axios.get(url).then(data => data.data)
+        queryFn: async () => await axios.get(`${url}`).then(data => data.data)
     });
+
     return {data, isLoading, isError};
 };
