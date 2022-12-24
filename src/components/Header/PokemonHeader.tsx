@@ -4,7 +4,7 @@ import backArrow from '../../assets/icon/back_arrow.svg';
 import { useNavigate } from "react-router";
 
 export const PokemonHeader: React.FC<{color: string}> = ({color}) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     return (
         <header className='header' style={{background: COLORS[`${color}`] }}>
             <img src={backArrow} className='back_img' onClick={() => navigate('/')} alt="backArrow"/>

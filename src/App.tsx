@@ -2,7 +2,7 @@ import React from 'react';
 import { Header } from '@components';
 import { PokemonsPage, PokemonPage } from "@pages";
 import {BrowserRouter, Navigate, Outlet, Route, Routes} from 'react-router-dom';
-import { ROUTES } from "./utils/constants/ROUTES";
+import { ROUTES } from "@constants";
 
 
 export const App: React.FC = () => {
