@@ -17,11 +17,16 @@ export const PokemonPage = () => {
     if (pokemon.isLoading || species.isLoading ) return <PokemonPageSpinner />
 
 
-    const {id, sprites, abilities, types, forms, height: h, weight: w, stats} = pokemon.data;
-    const {color} = species.data;
+    const {id, sprites, abilities, types, height: h, weight: w, stats} = pokemon.data;
+    const {color, varieties} = species.data;
     const {hp, attack, defence, spDefence, spAttack, speed} = getStatsFromArray(stats);
     const {hpPercent, defencePercent, spDefencePercent, spAttackPercent, attackPercent, speedPercent} = getStatPercent(getStatsFromArray(stats));
     const {height, weight, lbs, feet} = getNormalHeightWeight(h, w);
+
+    console.log(species.data.varieties);
+
+
+
 
     return (
        <>
@@ -46,7 +51,7 @@ export const PokemonPage = () => {
                                    </div>
                                </div>
                                <div className="info__forms inf"><span>Forms</span>
-                                   <div className="content content__form">{forms.map((form) => (<div className='form' key={form.name} style={{background: COLORS[`${color.name}`]}} >{form.name}</div>))}</div>
+                                   <div className="content content__form">{varieties.map((variety) => (<div className='form' key={variety.pokemon.name} style={{background: COLORS[`${color.name}`]}} >{variety.pokemon.name}</div>))}</div>
                                </div>
 
                            </div>
