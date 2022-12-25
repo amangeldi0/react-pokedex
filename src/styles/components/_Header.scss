@@ -53,8 +53,9 @@
     @media (max-width: 600px) {
       gap: 10px;
     }
-    img{
-      width: 20px;
+    .account__icon{
+      width: 25px;
+      padding: 3px;
       @media (max-width: 400px) {
         height: 18px;
         margin-top: 3px;

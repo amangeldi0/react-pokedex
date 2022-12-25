@@ -28,7 +28,7 @@ export const PokemonsPage: React.FC = () => {
         setScroll(window.scrollY);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -64,7 +64,12 @@ export const PokemonsPage: React.FC = () => {
                     })
                 }
             </div>
-            <div ref={ref} style={{margin: '30px 0', textAlign: 'center'}}>{offset === 905 ? 'Pokemon are over' : 'Loading Pokemon...'}</div>
+            <div
+                ref={ref}
+                style={{margin: '30px 0', textAlign: 'center'}}
+                role='link'
+                tabIndex={0}
+            >{offset === 905 ? 'Pokemon are over' : 'Loading Pokemon...'}</div>
         </div>
     );
 };

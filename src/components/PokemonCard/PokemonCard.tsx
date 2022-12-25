@@ -35,7 +35,16 @@ export const PokemonCard: React.FC<{pokemonProps: Result}> = ({pokemonProps}) =>
 
     return(
 
-        <div className='pokemon__card' onClick={() => navigate(`/pokemon/${PokemonName}`)}>
+        <div className='pokemon__card'
+             onClick={() => navigate(`/pokemon/${PokemonName}`)}
+             role='button'
+             tabIndex={3}
+             onKeyPress={(event) => {
+                 if (event.key === 'Enter'){
+                     navigate(`/pokemon/${PokemonName}`);
+                 }
+             }}
+        >
             <div className="pokemon__image">
                 {load ? <div className='loader'><img src={loader} alt=""/> <div className='info'>image loading...</div></div> : <div><img src={imgLink} alt="pokemon__image" className='image' onLoad={() => setLoad(false)}/></div>}
                 <img src={imgLink} alt="pokemon__image" className='image' onLoad={() => setLoad(false)} style={{display: "none"}}/>

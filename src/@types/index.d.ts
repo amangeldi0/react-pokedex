@@ -1,7 +1,6 @@
 import {AxiosRequestConfig} from "axios";
 import {Dispatch, SetStateAction} from "react";
 import {Chain} from "./species";
-import {Stat} from "./pokemon";
 
 // Pokemon
 export * from './pokemon';
@@ -10,6 +9,9 @@ export * from './species';
 
 export interface IAutoCompleteProps {
     suggestions: string[] | undefined;
+    focus: boolean;
+    search: string;
+    setSearch: Dispatch<SetStateAction<string>>;
 }
 export interface getNormalHeightWeightReturn {
     height: string;
