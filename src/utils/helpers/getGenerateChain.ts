@@ -1,20 +1,27 @@
-import { Chain, getGenerationChain } from "@types";
+import {Chain, ChainObj, Evolution} from "@types";
+import axios from "axios";
 
-export const getGenerateChain = (pokemonName: string, chainLink: Chain): getGenerationChain => {
-    if (chainLink.species.name === pokemonName)
-        return { prev: null, current: chainLink, next: chainLink.evolves_to };
 
-    let chain: getGenerationChain;
-    for (let i = 0; i < chainLink.evolves_to.length; i += 1) {
-        const evolve = chainLink.evolves_to[i];
-        if (evolve.species.name === pokemonName) {
-            chain = { prev: chainLink, current: evolve, next: evolve.evolves_to};
-            break;
+export const getEvolutionChain = async (url: string): Promise<ChainObj[]> => {
+    const response = await axios(
+        `${url}`
+    );
+
+    const evolutionChain: Evolution = response.data;
+
+    const evolutionArray: ChainObj[] = [];
+
+    function processEvolutionChain(evolution: Chain) {
+        const obj: ChainObj = {
+            name: evolution.species.name,
+            details: evolution.evolution_details[0]
+        };
+        evolutionArray.push(obj);
+        if (evolution.evolves_to.length > 0) {
+            evolution.evolves_to.forEach(processEvolutionChain);
         }
-        chain = getGenerateChain(pokemonName, evolve);
     }
+    processEvolutionChain(evolutionChain.chain);
 
-
-    // @ts-expect-error
-    return chain;
-};
+    return evolutionArray;
+}

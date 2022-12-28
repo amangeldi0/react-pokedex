@@ -95,7 +95,7 @@ export interface EvolutionDetail {
     min_affection:           null;
     min_beauty:              null;
     min_happiness:           null;
-    min_level:               number;
+    min_level:               number | null;
     needs_overworld_rain:    boolean;
     party_species:           null;
     party_type:              null;

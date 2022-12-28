@@ -2,31 +2,27 @@ import React from 'react';
 import { useParams } from "react-router-dom";
 import {useGetPokemonSpecies, useGetPokemonByName} from "@hooks";
 import { PokemonHeader, PokemonPageSpinner} from "@components";
-import {getNormalHeightWeight, getImgPathLink, getStatsFromArray, getStatPercent} from '@helpers';
+import {getNormalHeightWeight, getImgPathLink, getStatsFromArray, getStatPercent, getEvolutionChain} from '@helpers';
 import {COLORS} from "@constants";
 
 export const PokemonPage = () => {
     const { pokemonName } = useParams();
     const name: string = pokemonName as string;
 
-
     const pokemon = useGetPokemonByName(name);
     const species = useGetPokemonSpecies(name);
 
     if (pokemon.isError || species.isError) throw new Error('error on PokemonPage component');
-    if (pokemon.isLoading || species.isLoading ) return <PokemonPageSpinner />
+    if (pokemon.isLoading || species.isLoading ) return <PokemonPageSpinner />;
 
 
     const {id, sprites, abilities, types, height: h, weight: w, stats} = pokemon.data;
-    const {color, varieties} = species.data;
+    const {color, varieties, evolution_chain} = species.data;
     const {hp, attack, defence, spDefence, spAttack, speed} = getStatsFromArray(stats);
     const {hpPercent, defencePercent, spDefencePercent, spAttackPercent, attackPercent, speedPercent} = getStatPercent(getStatsFromArray(stats));
     const {height, weight, lbs, feet} = getNormalHeightWeight(h, w);
 
-    console.log(species.data.varieties);
-
-
-
+    const evolutions = getEvolutionChain(evolution_chain.url);
 
     return (
        <>
@@ -37,20 +33,20 @@ export const PokemonPage = () => {
                    <div className="pokemon__info__image__stats">
                        <div className="rotate__inf">
                            <div className="info">
-                               <div className="info__id inf"><span>ID</span> <div className="content">#{id.toString().length === 1 ? `00${id}` : id.toString().length === 2 ? `0${id}` : `${id}`}</div></div>
-                               <div className="info__height inf"><span>Height</span><div className="content">{height}m ( {feet} )</div></div>
-                               <div className="info__weight inf"><span>Weight</span><div className="content">{weight}kg ( {lbs}lbs. )</div></div>
-                               <div className="info__abilities inf"><span>Abilities</span>
+                               <div className="info__id inf"><div className='label'>ID</div> <div className="content">#{id.toString().length === 1 ? `00${id}` : id.toString().length === 2 ? `0${id}` : `${id}`}</div></div>
+                               <div className="info__height inf"><div className='label'>Height</div><div className="content">{height}m ( {feet} )</div></div>
+                               <div className="info__weight inf"><div className='label'>Weight</div><div className="content">{weight}kg ( {lbs}lbs. )</div></div>
+                               <div className="info__abilities inf"><div className='label'>Abilities</div>
                                    <div className="content content__ability">{abilities.map((ability) => (<div key={ability.ability.name} className="ability" style={{background: COLORS[`${color.name}`]}}>{ability.ability.name}</div>))}</div>
                                </div>
-                               <div className="info__types inf"><span>Type</span>
+                               <div className="info__types inf"><div className='label'>Type</div>
                                    <div className="content content__type"> {types.map((type) =>
                                        (<div key={type.type.name} className={`type ${type.type.name}`}>
                                            {type.type.name} <img className='type__image' src={getImgPathLink(type.type.name)} alt=""/>
                                        </div>))}
                                    </div>
                                </div>
-                               <div className="info__forms inf"><span>Forms</span>
+                               <div className="info__forms inf"><div className='label'>Forms</div>
                                    <div className="content content__form">{varieties.map((variety) => (<div className='form' key={variety.pokemon.name} style={{background: COLORS[`${color.name}`]}} >{variety.pokemon.name}</div>))}</div>
                                </div>
 
@@ -107,6 +103,5 @@ export const PokemonPage = () => {
                </div>
            </div>
        </>
-        // <PokemonEvolutionChain name={name} url={species.data.evolution_chain.url} />
     );
 };
