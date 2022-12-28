@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from "react-router-dom";
 import {useGetPokemonSpecies, useGetPokemonByName} from "@hooks";
-import { PokemonHeader, PokemonPageSpinner} from "@components";
+import { PokemonHeader, PokemonPageSpinner, PokemonInfo, PokemonStats} from "@components";
 import {getNormalHeightWeight, getImgPathLink, getStatsFromArray, getStatPercent, getEvolutionChain} from '@helpers';
 import {COLORS} from "@constants";
 
@@ -16,11 +16,8 @@ export const PokemonPage = () => {
     if (pokemon.isLoading || species.isLoading ) return <PokemonPageSpinner />;
 
 
-    const {id, sprites, abilities, types, height: h, weight: w, stats} = pokemon.data;
-    const {color, varieties, evolution_chain} = species.data;
-    const {hp, attack, defence, spDefence, spAttack, speed} = getStatsFromArray(stats);
-    const {hpPercent, defencePercent, spDefencePercent, spAttackPercent, attackPercent, speedPercent} = getStatPercent(getStatsFromArray(stats));
-    const {height, weight, lbs, feet} = getNormalHeightWeight(h, w);
+    const { sprites } = pokemon.data;
+    const {color, evolution_chain} = species.data;
 
     const evolutions = getEvolutionChain(evolution_chain.url);
 
@@ -31,74 +28,11 @@ export const PokemonPage = () => {
                <div className="pokemon__page__container">
                    <div className="pokemon__name">{name}</div>
                    <div className="pokemon__info__image__stats">
-                       <div className="rotate__inf">
-                           <div className="info">
-                               <div className="info__id inf"><div className='label'>ID</div> <div className="content">#{id.toString().length === 1 ? `00${id}` : id.toString().length === 2 ? `0${id}` : `${id}`}</div></div>
-                               <div className="info__height inf"><div className='label'>Height</div><div className="content">{height}m ( {feet} )</div></div>
-                               <div className="info__weight inf"><div className='label'>Weight</div><div className="content">{weight}kg ( {lbs}lbs. )</div></div>
-                               <div className="info__abilities inf"><div className='label'>Abilities</div>
-                                   <div className="content content__ability">{abilities.map((ability) => (<div key={ability.ability.name} className="ability" style={{background: COLORS[`${color.name}`]}}>{ability.ability.name}</div>))}</div>
-                               </div>
-                               <div className="info__types inf"><div className='label'>Type</div>
-                                   <div className="content content__type"> {types.map((type) =>
-                                       (<div key={type.type.name} className={`type ${type.type.name}`}>
-                                           {type.type.name} <img className='type__image' src={getImgPathLink(type.type.name)} alt=""/>
-                                       </div>))}
-                                   </div>
-                               </div>
-                               <div className="info__forms inf"><div className='label'>Forms</div>
-                                   <div className="content content__form">{varieties.map((variety) => (<div className='form' key={variety.pokemon.name} style={{background: COLORS[`${color.name}`]}} >{variety.pokemon.name}</div>))}</div>
-                               </div>
-
-                           </div>
-                       </div>
+                       <PokemonInfo pokemon={pokemon.data} species={species.data} />
                        <div className="img">
                            <img src={sprites.other?.["official-artwork"].front_default} alt="pokemonImg"/>
                        </div>
-                       <div className="rotate__stats">
-                           <div className="stats">
-                               <div className="stat">
-                                   <div className="title hp">hp</div>
-                                   <div className="value hp_value">
-                                       <div className="progress_bar" style={{backgroundColor: COLORS[`${color.name}`], width: `${hpPercent}%`}}><div className="statValue">{hp}</div></div>
-                                   </div>
-                               </div>
-                               <div className="stat">
-                                   <div className="title attack">attack</div>
-                                   <div className="value attack_value">
-                                       <div className="progress_bar" style={{backgroundColor: COLORS[`${color.name}`], width: `${attackPercent + 5}%`}}><div className="statValue">{attack}</div></div>
-                                   </div>
-                               </div>
-                               <div className="stat">
-                                   <div className="title defence">defence</div>
-                                   <div className="value defence_value">
-                                       <div className="progress_bar" style={{backgroundColor: COLORS[`${color.name}`], width: `${defencePercent + 5}%`}}><div className="statValue">{defence}</div></div>
-                                   </div>
-                               </div>
-                               <div className="stat">
-                                   <div className="title sp_attack">sp. attack</div>
-                                   <div className="value sp_attack_value">
-                                       <div className="progress_bar" style={{backgroundColor: COLORS[`${color.name}`], width: `${spAttackPercent + 5}%`}}><div className="statValue">{spAttack}</div></div>
-                                   </div>
-                               </div>
-                               <div className="stat">
-                                   <div className="title sp_defence">sp. defence</div>
-                                   <div className="value sp_defence_value">
-                                       <div className="progress_bar" style={{backgroundColor: COLORS[`${color.name}`], width: `${spDefencePercent + 5}%`}}><div className="statValue">{spDefence}</div></div>
-                                   </div>
-                               </div>
-                               <div className="stat">
-                                   <div className="title speed">speed</div>
-                                   <div className="value speed_value">
-                                       <div className="progress_bar" style={{backgroundColor: COLORS[`${color.name}`], width: `${speedPercent + 5}%`}}><div className="statValue">{speed}</div></div>
-                                   </div>
-                               </div>
-                               <div className="stat total">
-                                   <div className="title total__title">total</div>
-                                   <div className="total_value">{hp + attack + defence + spAttack + spDefence + speed}</div>
-                               </div>
-                           </div>
-                       </div>
+                       <PokemonStats pokemon={pokemon.data} species={species.data} />
                    </div>
                </div>
            </div>

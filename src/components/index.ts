@@ -6,3 +6,5 @@ export * from './AutoCompleteSearch/AutoCompleteSearch';
 export * from './PokemonCardSpinner/PokemonCardSpinner';
 export * from './GoUp/GoUp';
 export * from './PokemonPageSpinner/PokemonPageSpinner';
+export * from  './PokemonInfo/PokemonInfo';
+export * from './PokemonStats/PokemonStats'

@@ -1,6 +1,8 @@
 import {AxiosRequestConfig} from "axios";
 import {Dispatch, SetStateAction} from "react";
-import {Chain, EvolutionDetail} from "./species";
+import {Chain, EvolutionDetail, PokemonSpecies} from "./species";
+import {PokemonInfo} from "../components/PokemonInfo/PokemonInfo";
+import {Pokemon} from "./pokemon";
 
 // Pokemon
 export * from './pokemon';
@@ -35,6 +37,11 @@ export interface statPercentReturn {
     spAttackPercent: number;
     spDefencePercent: number;
     speedPercent: number;
+}
+
+export interface IPokemonInfoStats {
+    pokemon: Pokemon;
+    species: PokemonSpecies;
 }
 export interface ChainObj {
     name: string;
