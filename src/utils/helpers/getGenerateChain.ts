@@ -24,4 +24,4 @@ export const getEvolutionChain = async (url: string): Promise<ChainObj[]> => {
     processEvolutionChain(evolutionChain.chain);
 
     return evolutionArray;
-}
+};

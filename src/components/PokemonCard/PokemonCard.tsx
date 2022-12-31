@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {KeyboardEvent, useState} from "react";
 import { useGetPokemonByUrl,  } from "@hooks";
 import { useNavigate } from "react-router";
 import { PokemonTypes } from '@components';
@@ -16,7 +16,7 @@ export const PokemonCard: React.FC<{pokemonProps: Result}> = ({pokemonProps}) =>
 
     const navigate = useNavigate();
 
-    if (isError) throw new Error('some problems with fetching to Pokemons')
+    if (isError) throw new Error('some problems with fetching to Pokemons');
 
     if (isLoading) return (
         <div className='pokemon__card__skeleton'>
@@ -33,18 +33,19 @@ export const PokemonCard: React.FC<{pokemonProps: Result}> = ({pokemonProps}) =>
     const {name: PokemonName, id, sprites, types} = data;
     const imgLink = sprites.other?.["official-artwork"].front_default;
 
+    const onDivKeyPressCapture = (event: KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter'){
+            navigate(`/pokemon/${PokemonName}`);
+        }
+    };
+
     return(
 
         <div className='pokemon__card'
              onClick={() => navigate(`/pokemon/${PokemonName}`)}
              role='button'
              tabIndex={3}
-             onKeyPress={(event) => {
-                 if (event.key === 'Enter'){
-                     navigate(`/pokemon/${PokemonName}`);
-                 }
-             }}
-        >
+             onKeyPress={onDivKeyPressCapture}>
             <div className="pokemon__image">
                 {load ? <div className='loader'><img src={loader} alt=""/> <div className='info'>image loading...</div></div> : <div><img src={imgLink} alt="pokemon__image" className='image' onLoad={() => setLoad(false)}/></div>}
                 <img src={imgLink} alt="pokemon__image" className='image' onLoad={() => setLoad(false)} style={{display: "none"}}/>

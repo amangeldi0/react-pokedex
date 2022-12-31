@@ -1,5 +1,5 @@
 import React from 'react';
-import loader from '../../assets/pokemon_page_spinner.gif'
+import loader from '../../assets/pokemon_page_spinner.gif';
 
 export const PokemonPageSpinner: React.FC = () => {
     return (

@@ -1,13 +1,12 @@
 import {AxiosRequestConfig} from "axios";
 import {Dispatch, SetStateAction} from "react";
-import {Chain, EvolutionDetail, PokemonSpecies} from "./species";
-import {PokemonInfo} from "../components/PokemonInfo/PokemonInfo";
-import {Pokemon} from "./pokemon";
 
 // Pokemon
 export * from './pokemon';
 // Pokemon Species
 export * from './species';
+// Pokemon Ability
+export * from './Ability';
 
 export interface IAutoCompleteProps {
     suggestions: string[] | undefined;
@@ -43,6 +42,19 @@ export interface IPokemonInfoStats {
     pokemon: Pokemon;
     species: PokemonSpecies;
 }
+export interface IPokemonInfo {
+    pokemon: Pokemon;
+    species: PokemonSpecies;
+    setLink: Dispatch<SetStateAction<string>>
+    setModal: Dispatch<SetStateAction<boolean>>
+}
+
+export interface IAbility {
+    link: string;
+    setModal: Dispatch<SetStateAction<boolean>>
+    color: string
+}
+
 export interface ChainObj {
     name: string;
     details: EvolutionDetail | undefined
@@ -54,7 +66,7 @@ export interface colors{
 
 export interface useOutsideClickProps {
     initialIsVisible: boolean;
-    setSearch: Dispatch<SetStateAction<string>>
+    setSearch?: Dispatch<SetStateAction<string>>
 }
 
 export interface IRequestPokemonParams {

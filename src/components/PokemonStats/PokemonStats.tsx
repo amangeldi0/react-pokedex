@@ -1,12 +1,12 @@
 import React from 'react';
-import { IPokemonInfoStats } from "@types";
-import {getStatPercent, getStatsFromArray} from '@helpers'
+import { IPokemonInfoStats, Pokemon, PokemonSpecies} from "@types";
+import {getStatPercent, getStatsFromArray} from '@helpers';
 import {COLORS} from "@constants";
 export const PokemonStats: React.FC<IPokemonInfoStats> = ({pokemon, species}) => {
 
-    const {stats} = pokemon;
-    const {color} = species;
-    const {hp, attack, defence, spDefence, spAttack, speed} = getStatsFromArray(stats)
+    const {stats}: Pokemon = pokemon;
+    const {color}: PokemonSpecies = species;
+    const {hp, attack, defence, spDefence, spAttack, speed} = getStatsFromArray(stats);
 
     const {hpPercent, defencePercent, spDefencePercent, spAttackPercent, attackPercent, speedPercent} = getStatPercent(getStatsFromArray(stats));
 
@@ -16,7 +16,8 @@ export const PokemonStats: React.FC<IPokemonInfoStats> = ({pokemon, species}) =>
                 <div className="stat">
                     <div className="title hp">hp</div>
                     <div className="value hp_value">
-                        <div className="progress_bar" style={{backgroundColor: COLORS[`${color.name}`], width: `${hpPercent}%`}}><div className="statValue">{hp}</div></div>
+                        <div className="progress_bar"
+                             style={{backgroundColor: COLORS[`${color.name}`], width: `${hpPercent}%`}}><div className="statValue">{hp}</div></div>
                     </div>
                 </div>
                 <div className="stat">

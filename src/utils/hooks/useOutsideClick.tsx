@@ -8,9 +8,11 @@ export const useOutsideClick = ({initialIsVisible, setSearch}: useOutsideClickPr
 
     const handleClickOutside = (event: Event) => {
 
-        if (ref.current && !ref.current.contains(event.target as HTMLElement)){
+        if ((ref.current != null) && !ref.current.contains(event.target as HTMLElement)){
             setShow(false);
-            setSearch('')
+            if (typeof setSearch === 'function'){
+                setSearch('');
+            }
         }
     };
 

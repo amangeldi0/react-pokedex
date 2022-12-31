@@ -5,4 +5,4 @@ export const MAXSTATS = {
     maxHp: 194,
     maxSpeciesAttack: 194,
     maxSpeciesDefence: 250,
-}
+};
