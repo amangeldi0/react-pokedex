@@ -1,5 +1,6 @@
 import {AxiosRequestConfig} from "axios";
 import {Dispatch, SetStateAction} from "react";
+import {Chain} from "./species";
 
 // Pokemon
 export * from './pokemon';
@@ -47,6 +48,10 @@ export interface IPokemonInfo {
     species: PokemonSpecies;
     setLink: Dispatch<SetStateAction<string>>
     setModal: Dispatch<SetStateAction<boolean>>
+}
+
+export interface IPokemonEvoChain {
+    evoChain: Chain[]
 }
 
 export interface IAbility {

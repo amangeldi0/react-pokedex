@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useParams } from "react-router-dom";
 import { useGetPokemonSpecies, useGetPokemonByName } from "@hooks";
-import {PokemonHeader, PokemonPageSpinner, PokemonInfo, PokemonStats, AbilityModal} from "@components";
+import {PokemonHeader, PokemonPageSpinner, PokemonInfo, PokemonStats, AbilityModal, PokemonEvoChain} from "@components";
 
 
 export const PokemonPage = () => {
@@ -19,7 +19,7 @@ export const PokemonPage = () => {
 
 
     const { sprites } = pokemon.data;
-    const { color } = species.data;
+    const { color, evolution_chain: evolutionChain} = species.data;
 
 
 
@@ -29,7 +29,7 @@ export const PokemonPage = () => {
            <PokemonHeader color={color.name} />
            <div className="pokemon__page">
                <div className="pokemon__page__container">
-                   <div className="pokemon__name">{name}</div>
+                   <div className="pokemon__name title">{name}</div>
                    <div className="pokemon__info__image__stats">
                        <PokemonInfo setModal={setModal} setLink={setLink} pokemon={pokemon.data} species={species.data}/>
                        <div className="img">
@@ -37,8 +37,11 @@ export const PokemonPage = () => {
                        </div>
                        <PokemonStats pokemon={pokemon.data} species={species.data} />
                    </div>
+                   <div className="pokemon__name evo__title">Evolution Chain</div>
+                   <PokemonEvoChain url={evolutionChain.url} curName={name} color={color.name}/>
                </div>
            </div>
+
        </>
     );
 };

@@ -9,3 +9,5 @@ export * from './PokemonPageSpinner/PokemonPageSpinner';
 export * from  './PokemonInfo/PokemonInfo';
 export * from './PokemonStats/PokemonStats';
 export * from './AbilityModal/AbilityModal';
+export * from './PokemonEvoChain/PokemonEvoChain';
+export * from './EvoCard/EvoCard';
