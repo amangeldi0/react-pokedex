@@ -2,6 +2,7 @@ import React from 'react';
 import { useGetPokemonByName } from '@hooks';
 import { useNavigate } from "react-router";
 import {COLORS} from "@constants";
+import loader from '../../assets/loader.gif';
 
 
 export const EvoCard: React.FC<{name: string, curName: string, color: string}> = ({name, curName, color}) => {
@@ -9,15 +10,23 @@ export const EvoCard: React.FC<{name: string, curName: string, color: string}> =
     const {data, isLoading, isError} = useGetPokemonByName(name);
     const navigate = useNavigate();
 
-    if (isLoading) return null;
+    if (isLoading) return (
+        <>
+            <div className='evo__card' onClick={() => navigate(`/pokemon/${name}`)} style={{justifyContent: 'center'}}>
+                <img src={loader} alt="loader" className='image__loader'/>
+            </div>
+
+        </>
+    );
 
     if (isError) throw new Error('error');
 
     const {id, sprites} = data;
 
     const bg = {
-        color: COLORS[color]
+        color: COLORS[color],
     };
+
     return (
         <div className='evo__card' onClick={() => navigate(`/pokemon/${name}`)}>
             <div className="evo__image"><img src={sprites.other?.["official-artwork"].front_default} alt=""/></div>
