@@ -9,11 +9,10 @@ export const AutoCompleteSearch: React.FC<IAutoCompleteProps> = ({suggestions, f
 
     const navigate = useNavigate();
 
-    if (suggestions?.length === 1){
-        throw new Error('Some problems with fetching name');
-    }
+    if (suggestions === undefined) return <div></div>;
 
-    const filter = search.length !== 0 ? suggestions?.filter(suggest =>
+
+    const filter = search.length !== 0 ? suggestions.filter(suggest =>
         suggest.toLowerCase().trim()
             .includes(search.toLowerCase().trim())) : [];
 
