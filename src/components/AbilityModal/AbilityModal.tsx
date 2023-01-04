@@ -37,11 +37,11 @@ export const AbilityModal: React.FC<IAbility> = ({link, setModal, color}) => {
                     </div>
                     <div className="game__effect ability">
                         <div className="title"><div style={bg}>EFFECT</div></div>
-                        <div className="content">{effect[0].short_effect}</div>
+                        <div className="content">{effect.length !== 0  ? effect[0].short_effect : 'None information'}</div>
                     </div>
                     <div className="game__in__effect ability">
                         <div className="title"><div style={bg}>IN-DEPTH EFFECT</div></div>
-                        <div className="content">{effect[0].effect}</div>
+                        <div className="content">{effect.length !== 0  ? effect[0].effect : 'None information'}</div>
                     </div>
                 </div>
 

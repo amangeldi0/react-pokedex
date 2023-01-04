@@ -13,7 +13,7 @@ export interface AbilityData {
 export interface EffectEntry {
     effect:       string;
     language:     Generation;
-    short_effect: string;
+    short_effect?: string;
 }
 
 export interface Generation {

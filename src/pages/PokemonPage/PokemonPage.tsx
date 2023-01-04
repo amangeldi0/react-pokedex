@@ -28,11 +28,6 @@ export const PokemonPage = () => {
     const { sprites } = pokemon.data;
     const { color, evolution_chain: evolutionChain} = species.data;
 
-    console.log(species.data);
-    console.log(pokemon.data);
-
-
-
     return (
        <>
            {modal ? <AbilityModal link={link} setModal={setModal} color={color.name}/> : ''}
