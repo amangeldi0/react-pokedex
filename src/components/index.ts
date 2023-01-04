@@ -11,3 +11,4 @@ export * from './PokemonStats/PokemonStats';
 export * from './AbilityModal/AbilityModal';
 export * from './PokemonEvoChain/PokemonEvoChain';
 export * from './EvoCard/EvoCard';
+export * from './OtherInformation/OtherInformation'

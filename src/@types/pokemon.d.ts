@@ -4,7 +4,7 @@ export interface Pokemon {
     forms:                    Species[];
     game_indices:             GameIndex[];
     height:                   number;
-    held_items:               any[];
+    held_items:               heldItems[];
     id:                       number;
     is_default:               boolean;
     location_area_encounters: string;
@@ -19,6 +19,22 @@ export interface Pokemon {
     weight:                   number;
 }
 
+export interface version_detail{
+    rarity: number;
+    version: {
+        name: string;
+        url: string;
+    }
+}
+
+
+export interface heldItems {
+    item: {
+        name: string,
+        url: string
+    }
+    version_detail: version_detail[]
+}
 export interface Ability {
     ability:   Species;
     is_hidden: boolean;
