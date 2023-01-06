@@ -23,7 +23,8 @@
       "@types": ["./@types"],
       "@hooks": ["./utils/hooks"],
       "@helpers": ["./utils/helpers"],
-      "@constants": ["./utils/constants"]
+      "@constants": ["./utils/constants"],
+      "@firebaseApp": ["./utils/firebase"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
