@@ -1,23 +1,47 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { AUTHProps, useLogInWithEmailAndPasswordMutationParams as Params } from '@types';
-import { useLogInWithEmailAndPasswordMutation } from '@firebaseApp';
+import {
+  AUTHProps,
+  useLogInWithEmailAndPasswordMutationParams as Params
+} from '@types';
+
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle
+} from 'react-firebase-hooks/auth';
+
+import { auth } from '@firebaseApp';
+
+import { 
+  emailSchema, 
+  passwordSchema 
+} from "@constants";
+
 import bg from '../../../../assets/img/pokemon-party.jpg';
-import {emailSchema, passwordSchema} from "@constants";
+import google from '../../../../assets/icon/google.png';
 
 export const SingIn: React.FC<AUTHProps> = ({ setIsSignIN, isSingIn }) => {
-  const { register, handleSubmit, formState } = useForm<Params>();
+  const { register, handleSubmit, formState } = useForm<Params>({mode: "onBlur"});
 
-  const { mutate, isLoading: loading } = useLogInWithEmailAndPasswordMutation({});
 
-  const isLoading = formState.isLoading || loading;
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+
+  const [signInWithGoogle, googleLoading, googleError] = useSignInWithGoogle(auth);
+
+
+  const isLoading = formState.isLoading && loading;
 
   return (
     <div className='auth__page'>
       <div className='form__content'>
         <form
           className='auth'
-          onSubmit={handleSubmit(({ email, password }) => mutate({ email, password }))}
+          onSubmit={handleSubmit(({ email, password }) => signInWithEmailAndPassword(email, password))}
         >
           <div className='auth__title'>Welcome back</div>
           <div className="form__input">
@@ -34,7 +58,12 @@ export const SingIn: React.FC<AUTHProps> = ({ setIsSignIN, isSingIn }) => {
           <button onClick={() => setIsSignIN(!isSingIn)} className='auth__button__acc'>
             {isSingIn ? 'Create new account' : 'Already have account'}
           </button>
+          <div className='google__button' onClick={() => signInWithGoogle()}>
+            <img src={google} alt="google"/>
+            Google
+          </div>
         </form>
+
         <div className='bg__image'>
           <img src={bg} alt='bg__image' />
         </div>

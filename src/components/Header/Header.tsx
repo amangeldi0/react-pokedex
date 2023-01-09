@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import accountIcon from '../../assets/icon/account_icon.svg';
+import { auth } from "@firebaseApp";
+import { useSignOut } from 'react-firebase-hooks/auth';
 
 import { AutoCompleteSearch } from '../AutoCompleteSearch/AutoCompleteSearch';
 
 export const Header: React.FC = () => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [focus, setFocus] = useState(true);
+  const [signOut, loading, error] = useSignOut(auth);
+
   const [search, setSearch] = useState<string>('');
 
   const getItemsFromLS = (): void => {
@@ -30,6 +34,7 @@ export const Header: React.FC = () => {
           />
           <img
             className='account__icon'
+            onClick={async () => await signOut()}
             src={accountIcon}
             role='button'
             tabIndex={2}

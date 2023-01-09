@@ -19,6 +19,7 @@
     "r": "^0.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.1.1",
     "react-hook-form": "^7.41.5",
     "react-intersection-observer": "^9.4.1",
     "react-lazy-load-image-component": "^1.5.6",

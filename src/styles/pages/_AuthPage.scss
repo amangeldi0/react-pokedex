@@ -38,7 +38,7 @@
       @media (max-width: 500px) {
         width: 100%;
         top: -20px;
-        height: 42vh;
+        height: 50vh;
         border-radius: 0 0 14px 14px;
       }
       .auth__title{
@@ -67,6 +67,17 @@
         border: 1px solid black;
         cursor: pointer;
         border-radius: 3px;
+      }
+      .google__button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border-radius: 3px;
+        border: 1px solid black;
+        padding: 2px 6px;
+        cursor: pointer;
+
       }
       .auth__button__acc{
         position: absolute;

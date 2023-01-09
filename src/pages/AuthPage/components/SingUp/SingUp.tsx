@@ -1,23 +1,45 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { AUTHProps, ISingUp } from '@types';
-import { useRegisterWithEmailAndPasswordMutation } from '@firebaseApp';
-import { emailSchema, passwordSchema, nameSchema} from '@constants';
+import {auth} from '@firebaseApp';
+
+import {
+  emailSchema,
+  passwordSchema,
+  nameSchema
+} from '@constants';
+
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle
+} from "react-firebase-hooks/auth";
+
 import bg from '../../../../assets/img/pokemon-party.jpg';
+import google from "../../../../assets/icon/google.png";
+
 
 export const SingUp: React.FC<AUTHProps> = ({ isSingIn, setIsSignIN }) => {
   const { register, handleSubmit, formState } = useForm<ISingUp>({ mode: 'onChange' });
 
-  const { mutate, isLoading: loading } = useRegisterWithEmailAndPasswordMutation({});
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useCreateUserWithEmailAndPassword(auth);
 
-  const isLoading = formState.isLoading || loading;
+  const [signInWithGoogle, googleLoading, googleError] = useSignInWithGoogle(auth);
+
+
+
+  const isLoading = formState.isLoading && loading;
 
   return (
     <div className='auth__page'>
       <div className='form__content'>
         <form
           className='auth'
-          onSubmit={handleSubmit(({ password, ...user }) => mutate({ user, password }))}
+          onSubmit={handleSubmit(({ password, ...user }) => createUserWithEmailAndPassword(user.email, password))}
         >
           <div className='auth__title'>Welcome</div>
           <div className="form__input">
@@ -42,6 +64,10 @@ export const SingUp: React.FC<AUTHProps> = ({ isSingIn, setIsSignIN }) => {
           <button onClick={() => setIsSignIN(!isSingIn)} className='auth__button__acc'>
             {isSingIn ? 'Create new account' : 'Already have account'}
           </button>
+          <div className='google__button' onClick={() => signInWithGoogle()}>
+            <img src={google} alt="google"/>
+            Google
+          </div>
         </form>
         <div className='bg__image'>
           <img src={bg} alt='bg__image' />

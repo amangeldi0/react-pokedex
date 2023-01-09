@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetPokemonSpecies, useGetPokemonByName } from '@hooks';
+
+import {
+  useGetPokemonSpecies,
+  useGetPokemonByName
+} from '@hooks';
+
 import {
   PokemonHeader,
   PokemonPageSpinner,

@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Chain } from './species';
 
 // Pokemon
@@ -112,4 +112,18 @@ export interface RequestMutationSettings<Func = {}> {
 export interface AUTHProps {
   isSingIn: boolean;
   setIsSignIN: Dispatch<SetStateAction<boolean>>;
+}
+export interface AuthContextState {
+  session: {
+    isLogin: boolean
+  }
+}
+
+export interface AuthStoreProvide {
+  children: React.ReactNode;
+}
+
+export interface AuthContextProps {
+  auth: AuthContextState;
+  setAuth: React.Dispatch<React.SetStateAction<AuthContextState>>;
 }

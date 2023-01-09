@@ -1,9 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import
+  React, {
+  useState,
+  useEffect
+} from 'react';
 
 import { useInView } from 'react-intersection-observer';
 
-import { GoUp, PokemonCard, Spinner } from '@components';
-import { useGetPokemons, useGetPokemonNamesToLs } from '@hooks';
+import {
+  GoUp,
+  PokemonCard,
+  Spinner
+} from '@components';
+import {
+  useGetPokemons,
+  useGetPokemonNamesToLs
+} from '@hooks';
+
+
 export const PokemonsPage: React.FC = () => {
   const [offset, setOffset] = useState<number>(45);
   const { ref, inView } = useInView();
